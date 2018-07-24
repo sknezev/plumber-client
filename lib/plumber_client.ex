@@ -12,7 +12,8 @@ defmodule PlumberClient do
       :world
 
   """
-  def hello do
-    :world
+  def version do
+    {:ok, channel} = GRPC.Stub.connect("localhost:50053")
+    {:ok, _reply} = channel |> InternalApi.Plumber.PipelineService.Stub.version(InternalApi.Plumber.VersionRequest.new())
   end
 end

@@ -8,13 +8,12 @@ defmodule PlumberClient.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    alias Plug.Adapters.Cowboy
+    #alias Plug.Adapters.Cowboy
 
     # Define workers and child supervisors to be supervised
     children = [
       # Starts a worker by calling: PlumberClient.Worker.start_link(arg1, arg2, arg3)
       # worker(PlumberClient.Worker, [arg1, arg2, arg3]),
-      Cowboy.child_spec(:http, PlumberClient.Router, [], [port: 4000]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
