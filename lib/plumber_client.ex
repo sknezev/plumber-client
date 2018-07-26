@@ -5,6 +5,7 @@ defmodule Plc do
   alias Util.Proto
   alias InternalApi.Plumber.DescribeRequest
   alias InternalApi.Plumber.TerminateRequest
+  alias InternalApi.Plumber.GetProjectIdRequest
 
   @moduledoc """
   Documentation for PlumberClient.
@@ -38,4 +39,8 @@ defmodule Plc do
     {:ok, _reply} = channel |> PplStub.terminate(TerminateRequest.new(ppl_id: arg, requester_id: "Plc"))
   end
 
+  def get_project_id(arg) do
+    {:ok, channel} = connect()
+    {:ok, _reply} = channel |> PplStub.get_project_id(GetProjectIdRequest.new(ppl_id: arg))
+  end
 end
