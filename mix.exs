@@ -19,7 +19,8 @@ defmodule PlumberClient.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger],
-     mod: {PlumberClient.Application, []}]
+     mod: {PlumberClient.Application, []},
+   ]
   end
 
   # Dependencies can be Hex packages:
@@ -42,6 +43,8 @@ defmodule PlumberClient.Mixfile do
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
       {:grpc, github: "tony612/grpc-elixir"},
+      {:util, github: "renderedtext/elixir-util"},
+      {:uuid, "~> 1.1"},
     ]
   end
 end

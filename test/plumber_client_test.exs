@@ -1,8 +1,9 @@
 defmodule PlumberClientTest do
   use ExUnit.Case
-  doctest PlumberClient
+  #doctest PlumberClient
 
-  test "greets the world" do
-    assert PlumberClient.hello() == :world
-  end
+  # test "greets the world" do
+  #   assert PlumberClient.hello() == :world
+  # end
+
 end
