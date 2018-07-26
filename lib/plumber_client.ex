@@ -3,6 +3,7 @@ defmodule Plc do
   alias InternalApi.Plumber.ScheduleRequest
   alias InternalApi.Plumber.VersionRequest
   alias Util.Proto
+  alias InternalApi.Plumber.DescribeRequest
 
   @moduledoc """
   Documentation for PlumberClient.
@@ -24,6 +25,11 @@ defmodule Plc do
 
   defp schedule_request(args) do
        Proto.deep_new!(ScheduleRequest, args)
+  end
+
+  def describe(arg) do
+    {:ok, channel} = connect()
+    {:ok, _reply} = channel |> PplStub.describe(DescribeRequest.new(ppl_id: arg))
   end
 
 end
