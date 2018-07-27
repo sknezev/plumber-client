@@ -59,15 +59,15 @@ defmodule Plc do
     {:ok, _reply} = channel |> PplStub.validate_yaml(ValidateYamlRequest.new(yaml_definition: yaml_def, ppl_id: ppl_id))
   end
 
-  def list(project_id, branch_name, page, page_size) do
+  def list(arg) do
     {:ok, channel} = connect()
-    {:ok, _reply} = channel |> PplStub.list(ListRequest.new(project_id: project_id, branch_name: branch_name, page: page, page_size: page_size))
+    {:ok, _reply} = channel |> PplStub.list(Proto.deep_new!(ListRequest, arg))
   end
 
 
-  def terminate_all(req_token, project_id, branch_name) do
+  def terminate_all(arg) do
     {:ok, channel} = connect()
-    {:ok, _reply} = channel |> PaStub.terminate_all(TerminateAllRequest.new(requester_token: req_token, project_id: project_id, branch_name: branch_name))
+    {:ok, _reply} = channel |> PaStub.terminate_all(Proto.deep_new!(TerminateAllRequest, arg))
   end
 
 end
