@@ -6,6 +6,8 @@ defmodule Plc do
   alias InternalApi.Plumber.DescribeRequest
   alias InternalApi.Plumber.TerminateRequest
   alias InternalApi.Plumber.GetProjectIdRequest
+  alias InternalApi.Plumber.DescribeTopologyRequest
+  alias InternalApi.Plumber.ValidateYamlRequest
 
   @moduledoc """
   Documentation for PlumberClient.
@@ -43,4 +45,15 @@ defmodule Plc do
     {:ok, channel} = connect()
     {:ok, _reply} = channel |> PplStub.get_project_id(GetProjectIdRequest.new(ppl_id: arg))
   end
+
+  def describe_topology(arg) do
+    {:ok, channel} = connect()
+    {:ok, _reply} = channel |> PplStub.describe_topology(DescribeTopologyRequest.new(ppl_id: arg))
+  end
+
+  def validate_yaml(yaml_def, ppl_id) do
+    {:ok, channel} = connect()
+    {:ok, _reply} = channel |> PplStub.validate_yaml(ValidateYamlRequest.new(yaml_definition: yaml_def, ppl_id: ppl_id))
+  end
+
 end
