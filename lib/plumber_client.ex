@@ -8,6 +8,9 @@ defmodule Plc do
   alias InternalApi.Plumber.GetProjectIdRequest
   alias InternalApi.Plumber.DescribeTopologyRequest
   alias InternalApi.Plumber.ValidateYamlRequest
+  alias InternalApi.Plumber.ListRequest
+  alias InternalApi.Plumber.TerminateAllRequest
+  alias InternalApi.Plumber.Admin.Stub, as: PaStub
 
   @moduledoc """
   Documentation for PlumberClient.
@@ -54,6 +57,17 @@ defmodule Plc do
   def validate_yaml(yaml_def, ppl_id) do
     {:ok, channel} = connect()
     {:ok, _reply} = channel |> PplStub.validate_yaml(ValidateYamlRequest.new(yaml_definition: yaml_def, ppl_id: ppl_id))
+  end
+
+  def list(project_id, branch_name, page, page_size) do
+    {:ok, channel} = connect()
+    {:ok, _reply} = channel |> PplStub.list(ListRequest.new(project_id: project_id, branch_name: branch_name, page: page, page_size: page_size))
+  end
+
+
+  def terminate_all(req_token, project_id, branch_name) do
+    {:ok, channel} = connect()
+    {:ok, _reply} = channel |> PaStub.terminate_all(TerminateAllRequest.new(requester_token: req_token, project_id: project_id, branch_name: branch_name))
   end
 
 end
